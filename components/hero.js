@@ -29,10 +29,10 @@ const Hero = () => {
       <div className={`${container} relative z-10 flex h-full items-center`}>
         <div className="w-full">
           <p className="text-[9px] tracking-[3px] text-[#d4dde3] min-[781px]:text-[10px]">
-            — &nbsp; CSE DEPARTMENT PRESENTS
+            &nbsp; CSE FACULTY PRESENTS
           </p>
           <h1 className="m-0 font-[Impact,Arial_Narrow,sans-serif] text-[47px] leading-[.92] tracking-[3px] [text-shadow:2px_2px_#000] min-[781px]:text-6xl min-[1100px]:text-7xl">
-            CPL <em className="font-normal not-italic">—</em> CSE
+            CPL <em className="font-normal not-italic">-</em> CSE
           </h1>
           <h2 className="m-0 -skew-x-3 font-[Impact,Arial_Narrow,sans-serif] text-[31px] leading-none tracking-[3px] text-[#78b82e] [text-shadow:2px_2px_#000] min-[781px]:text-[37px] min-[1100px]:text-[50px]">
             PREMIER LEAGUE
@@ -43,7 +43,7 @@ const Hero = () => {
           <p className="m-0 mb-1 text-base leading-[1.25] min-[781px]:text-lg">
             The Ultimate Cricket Showdown of the
             <br />
-            <b className="text-[#78b82e]">CSE Department!</b>
+            <b className="text-[#78b82e]">CSE Faculty!</b>
           </p>
           <p className="m-0 text-xs leading-[1.4] min-[781px]:text-[13px]">
             Where talent meets teamwork and champions are made.
@@ -55,6 +55,7 @@ const Hero = () => {
             className="mt-3.5 flex flex-col gap-[18px] min-[781px]:flex-row"
           >
             <RegistrationCard
+              href="/player-registration"
               title={
                 <>
                   PLAYER
@@ -69,6 +70,7 @@ const Hero = () => {
             </RegistrationCard>
             <RegistrationCard
               team
+              href="/team-registration"
               title={
                 <>
                   TEAM

@@ -1,3 +1,5 @@
+import { FaCalendarDays, FaClock, FaLocationDot } from "react-icons/fa6";
+
 const Badge = ({ code, name, blue }) => {
   return (
     <div
@@ -25,14 +27,14 @@ const MatchCard = ({ className = "" }) => {
             MATCH 01
           </small>
           <b className="my-1 block font-[Impact,sans-serif] text-3xl">VS</b>
-          <p className="my-1.5 text-[10px]">▣ 25 MAY 2025</p>
-          <p className="my-1.5 text-[10px]">◷ 10:00 AM</p>
+          <p className="my-1.5 flex items-center justify-center gap-1 text-[10px]"><FaCalendarDays />25 MAY 2025</p>
+          <p className="my-1.5 flex items-center justify-center gap-1 text-[10px]"><FaClock />10:00 AM</p>
         </div>
         <Badge code="BB" name="BYTE BLAZERS" blue />
       </div>
       <div className="mt-1 grid grid-cols-[1fr_1.25fr_1fr] text-center text-[10px]">
         <b>Code Crusaders</b>
-        <span>● University Ground</span>
+        <span className="flex items-center justify-center gap-1"><FaLocationDot className="text-[#78b82e]" />University Ground</span>
         <b>Byte Blazers</b>
       </div>
     </article>
