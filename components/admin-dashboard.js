@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { FaArrowRightFromBracket, FaBell, FaCalendarCheck, FaChartBar, FaKey, FaListCheck, FaMagnifyingGlass, FaShieldHalved, FaUserCheck, FaUserGroup, FaUserPlus, FaUsers } from "react-icons/fa6";
+import { FaArrowRightFromBracket, FaBell, FaCalendarCheck, FaChartBar, FaKey, FaListCheck, FaShieldHalved, FaUserCheck, FaUserGroup, FaUserPlus, FaUsers } from "react-icons/fa6";
 import AdminPlayersView from "./admin-players-view";
 import AdminLoginForm from "./admin-login-form";
 import AdminChangePasswordView from "./admin-change-password-view";
@@ -72,7 +72,6 @@ return <div className="min-h-screen bg-[#02121f] text-[#edf2f4]">
   <main className="flex min-h-screen flex-col lg:ml-[240px]">
     <header className="flex h-[77px] shrink-0 items-center justify-between border-b border-white/15 px-5">
       <div><h1 className="text-2xl font-bold">CPL Admin Panel</h1><p className="text-xs text-[#86bf31]">CSE Premier League</p></div>
-      <div className="hidden w-[360px] items-center gap-2 rounded-md border border-white/20 bg-[#031522] px-3 py-2 text-sm text-[#9faab2] md:flex"><FaMagnifyingGlass/> Search players, teams, ID, email...</div>
       <div className="flex items-center gap-4"><FaBell className="text-xl"/><div className="hidden text-right text-sm sm:block"><b>{session.email}</b><small className="block text-[#86bf31] capitalize">{session.role==="superadmin"?"Super Admin":"Admin"}</small></div><i className="grid size-10 place-items-center rounded-full bg-[#b68d5a] text-[#091720]">{initials}</i></div>
     </header>
     <div id="dashboard" className="mx-auto w-full max-w-[1460px] flex-1 p-4">

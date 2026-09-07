@@ -43,6 +43,7 @@ const TeamRegistrationForm = () => {
     const uniqueKey = form.uniqueKey.value.trim();
     if (!teamName) return setMessage("Enter your team name.");
     if (!uniqueKey) return setMessage("Enter the unique key provided by the admin.");
+    if (!logoFile) return setMessage("Upload your team logo.");
     if (managers.some((manager) => !manager.name.trim() || !manager.phone.trim() || !manager.email.trim())) return setMessage("Complete all manager fields.");
     if (managers.some((manager) => !/^\d{11}$/.test(manager.phone.replace(/\D/g, "")))) return setMessage("Each manager's mobile number must contain exactly 11 digits.");
     setStatus("loading"); setMessage("");
@@ -79,17 +80,17 @@ const TeamRegistrationForm = () => {
     <div className="mb-7 flex items-center gap-4"><i className="grid size-16 place-items-center rounded-full bg-[#6ca82c] text-3xl not-italic"><FaUserGroup /></i><div><h1 className="font-[Impact,Arial_Narrow,sans-serif] text-[38px] leading-none tracking-wide min-[680px]:text-[52px]">TEAM <span className="text-[#78b82e]">REGISTRATION</span></h1><p className="mt-2 text-sm min-[680px]:text-base">Register your team to join the <b className="text-[#78b82e]">CPL - CSE Premier League.</b></p></div></div>
     <div className="grid gap-5 min-[680px]:grid-cols-[140px_1fr]">
       <label className="block">
-        <span className="mb-2 block text-sm font-bold">TEAM LOGO <em className="ml-1 text-xs font-normal text-[#aeb8be]">(Optional)</em></span>
+        <span className="mb-2 block text-sm font-bold">TEAM LOGO</span>
         <span className="relative flex size-[140px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-xl border-2 border-dashed border-[#78b82e] bg-[#031320]/75 text-center">
           {logoPreview
             ? <img className="absolute inset-0 size-full object-cover" src={logoPreview} alt="Team logo" />
             : <><FaUpload className="text-3xl text-[#78b82e]" /><small className="mt-2 text-[10px] text-[#abb3b9]">JPG, PNG<br />(Max 2MB)</small></>}
-          <input className="sr-only" type="file" name="logo" accept="image/png,image/jpeg" onChange={handleLogoChange} />
+          <input className="sr-only" type="file" name="logo" accept="image/png,image/jpeg" onChange={handleLogoChange} required />
         </span>
       </label>
-      <div className="grid gap-5 min-[680px]:grid-cols-2">
+      <div className="grid gap-5">
         <label><span className="mb-2 block text-sm font-bold">TEAM NAME</span><input className={inputClass} name="teamName" placeholder="Enter team name" required /></label>
-        <label><span className="mb-2 flex items-center gap-2 text-sm font-bold">UNIQUE KEY <FaKey className="text-[#78b82e]" /></span><input className={inputClass} name="uniqueKey" placeholder="Enter unique key" required /><small className="mt-2 block text-xs text-[#b8c1c7]">Enter the unique key provided to you by the CPL admin.</small></label>
+        <label><span className="mb-2 flex items-center gap-2 text-sm font-bold">UNIQUE KEY <FaKey className="text-[#78b82e]" /></span><input className={inputClass} name="uniqueKey" placeholder="Enter unique key" required /><small className="mt-2 block text-xs text-[#b8c1c7]">Contact the CPL committee to get your team key — they will provide it to you.</small></label>
       </div>
     </div>
     <div className="mt-6"><h2 className="font-[Impact,Arial_Narrow,sans-serif] text-lg"><span className="text-[#78b82e]">●</span> MANAGERS</h2><p className="mb-3 text-xs text-[#c5cdd1]">Add at least one manager. You can add more if needed.</p><div className="space-y-2">{managers.map((manager,index)=><div className="grid gap-3 rounded-lg border border-white/25 bg-[#041b2b]/75 p-3 min-[760px]:grid-cols-[34px_1fr_1fr_1fr_28px] min-[760px]:items-end" key={index}><span className="grid size-7 place-items-center rounded-full bg-[#70ab2c] text-sm font-bold">{index + 1}</span><label><span className="mb-1 block text-xs font-bold">MANAGER NAME</span><input className={inputClass} value={manager.name} onChange={(event) => updateManager(index, "name", event.target.value)} placeholder="Enter manager name" required /></label><label><span className="mb-1 block text-xs font-bold">MOBILE NUMBER</span><input className={inputClass} type="tel" inputMode="numeric" value={manager.phone} onChange={(event) => updateManager(index, "phone", event.target.value)} placeholder="11 digit mobile number" required /></label><label><span className="mb-1 block text-xs font-bold">EMAIL ADDRESS</span><input className={inputClass} type="email" value={manager.email} onChange={(event) => updateManager(index, "email", event.target.value)} placeholder="Enter email address" required /></label><button className="mb-2 cursor-pointer text-[#ff5b52] hover:text-red-300" type="button" aria-label={`Remove manager ${index + 1}`} onClick={() => removeManager(index)}><FaTrash /></button></div>)}</div></div>

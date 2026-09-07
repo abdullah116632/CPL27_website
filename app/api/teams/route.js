@@ -28,7 +28,8 @@ export const POST = async (request) => {
       return Response.json({ error: "Team name, unique key, and at least one complete manager are required." }, { status: 400 });
     }
     const hasLogo = logo instanceof File && logo.size > 0;
-    if (hasLogo && (!["image/jpeg", "image/png"].includes(logo.type) || logo.size > 2 * 1024 * 1024)) {
+    if (!hasLogo) return Response.json({ error: "Upload your team logo." }, { status: 400 });
+    if (!["image/jpeg", "image/png"].includes(logo.type) || logo.size > 2 * 1024 * 1024) {
       return Response.json({ error: "Logo must be a JPG or PNG file smaller than 2MB." }, { status: 400 });
     }
     await connectToDatabase();
@@ -38,7 +39,7 @@ export const POST = async (request) => {
       const existingKey = await TeamKey.findOne({ key: normalizedKey }).lean();
       return Response.json({ error: existingKey ? "This unique key has already been used." : "Invalid unique key." }, { status: existingKey ? 409 : 400 });
     }
-    const logoUrl = hasLogo ? (await uploadImage(logo, "cpl/team-logos")).secure_url : null;
+    const logoUrl = (await uploadImage(logo, "cpl/team-logos")).secure_url;
     const team = await Team.create({ name, uniqueKey: normalizedKey, managers, logoUrl });
     claimedKey.team = team._id;
     await claimedKey.save();
