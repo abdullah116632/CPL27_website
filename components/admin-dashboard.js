@@ -1,10 +1,106 @@
-import { FaBell, FaCalendarCheck, FaChartBar, FaClipboardCheck, FaGear, FaMagnifyingGlass, FaPeopleGroup, FaShieldHalved, FaTrophy, FaUserCheck, FaUserGroup, FaUserPlus, FaUsers } from "react-icons/fa6";
+"use client";
 
-const players=["Rohan Sharma","Aman Verma","Sahil Khan","Vivek Singh","Karan Patel"];
-const teams=["Tech Titans","Code Crushers","Binary Blasters","Algorithm Avengers","Debuggers United"];
-const menu=["Dashboard","Teams","Players","Player Approvals","Sessions","Categories","Matches","Groups","Assign Players","Fixtures","Results","Points Table","Statistics","Notifications","Settings","Audit Logs"];
-const Panel=({title,children,className=""})=><section className={`rounded-lg border border-[#b8a18055] bg-[#031827]/90 p-3 shadow-lg ${className}`}><h2 className="mb-3 flex items-center gap-2 font-[Impact,Arial_Narrow,sans-serif] text-sm tracking-wide"><i className="size-2 rounded-full bg-[#81bd30]"/>{title}</h2>{children}</section>;
-const Table=({type="players"})=><table className="w-full text-left text-[10px]"><thead className="border-y border-white/15 text-[#d4dde1]"><tr>{["#",type==="teams"?"TEAM NAME":"PLAYER","PLAYER ID","SESSION",type==="teams"?"PLAYERS":"CATEGORY","STATUS"].map(x=><th className="px-2 py-2" key={x}>{x}</th>)}</tr></thead><tbody>{(type==="teams"?teams:players).map((name,i)=><tr className="border-b border-white/10" key={name}><td className="px-2 py-2">{i+1}</td><td className="px-2 py-2 font-medium">{name}</td><td className="px-2 py-2">{type==="teams"?`TT25-K7X${9-i}`:`PLR-2025-00${i+1}`}</td><td className="px-2 py-2">{type==="teams"?10+i:"Morning"}</td><td className="px-2 py-2">{type==="teams"?<b className="rounded bg-[#426e12] px-1.5 py-0.5 text-[#c6f45a]">Active</b>:i%3===1?<b className="rounded bg-[#856406] px-1.5 py-0.5 text-yellow-200">Pending</b>:<b className="rounded bg-[#426e12] px-1.5 py-0.5 text-[#c6f45a]">Approved</b>}</td></tr>)}</tbody></table>;
-const Stat=({icon:Icon,label,value,color})=><article className="rounded-lg border border-white/10 bg-[#031827] p-4"><div className="flex items-center gap-3"><i className={`grid size-14 place-items-center rounded-full text-2xl ${color}`}><Icon/></i><div><p className="text-xs font-bold uppercase">{label}</p><b className="text-3xl">{value}</b><small className="block text-[#8bc832]">+18 this week ↗</small></div></div></article>;
-const AdminDashboard=()=> <div className="min-h-screen bg-[#02121f] text-[#edf2f4]"><aside className="fixed inset-y-0 left-0 hidden w-[195px] border-r border-white/15 bg-[#031725] p-3 lg:block"><div className="mb-7 border-b border-dashed border-white/50 p-3 text-center font-bold">✉ &nbsp; CPL LOGO</div><nav className="space-y-1">{menu.map((item,index)=><a className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm ${index===0?"bg-[#4a7c17] text-white":"text-[#d1dade] hover:bg-white/10"}`} href="#dashboard" key={item}>{index<8?<FaUsers/>:<FaChartBar/>}{item}</a>)}</nav></aside><main className="lg:ml-[195px]"><header className="flex h-[77px] items-center justify-between border-b border-white/15 px-5"><div><h1 className="text-2xl font-bold">CPL Admin Panel</h1><p className="text-xs text-[#86bf31]">CSE Premier League</p></div><div className="hidden w-[360px] items-center gap-2 rounded-md border border-white/20 bg-[#031522] px-3 py-2 text-sm text-[#9faab2] md:flex"><FaMagnifyingGlass/> Search players, teams, ID, email...</div><div className="flex items-center gap-4"><FaBell className="text-xl"/><div className="hidden text-right text-sm sm:block"><b>Admin User</b><small className="block text-[#86bf31]">Super Admin</small></div><i className="grid size-10 place-items-center rounded-full bg-[#b68d5a] text-[#091720]">AU</i></div></header><div id="dashboard" className="mx-auto max-w-[1460px] p-4"><div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4"><Stat icon={FaUserCheck} label="Total Players" value="248" color="bg-[#315e1b] text-[#b8e84a]"/><Stat icon={FaCalendarCheck} label="Pending Approvals" value="12" color="bg-[#6b4a10] text-[#ffbf24]"/><Stat icon={FaShieldHalved} label="Total Teams" value="24" color="bg-[#103e68] text-[#4aa7ff]"/><Stat icon={FaPeopleGroup} label="Assigned Players" value="186" color="bg-[#39216a] text-[#cb7cff]"/></div><div className="mt-3 grid gap-3 xl:grid-cols-[1.7fr_.75fr_1.2fr]"><Panel title="PENDING PLAYER APPROVALS"><Table/><p className="mt-3 text-center text-xs text-[#c7d7e0]">View all pending approvals →</p></Panel><Panel title="GENERATE TEAM KEY"><label className="text-xs">Team Name<select className="mt-2 w-full rounded border border-white/30 bg-[#02121f] p-2"><option>Tech Titans</option></select></label><label className="mt-4 block text-xs">Unique Key<input className="mt-2 w-full rounded border border-white/30 bg-[#02121f] p-2" value="TT25-K7X9-MNQ3" readOnly/></label><button className="mt-4 w-full rounded bg-[#639d28] py-3 text-sm font-bold">⟳ Generate New Key</button></Panel><Panel title="TEAMS OVERVIEW"><Table type="teams"/><p className="mt-3 text-center text-xs">View all teams →</p></Panel></div><div className="mt-3 grid gap-3 xl:grid-cols-[1.4fr_.95fr_.95fr]"><Panel title="ALL PLAYERS"><div className="mb-3 rounded border border-white/25 p-2 text-xs text-[#aeb9bf]"><FaMagnifyingGlass className="mr-2 inline"/>Search players by name, ID or email...</div><Table/></Panel><Panel title="PLAYER GROUPING"><div className="grid grid-cols-3 gap-2">{["GROUP A","GROUP B","GROUP C"].map((group,index)=><div className="rounded border border-white/20 p-2" key={group}><b className="text-xs text-[#aee240]">{group}</b>{players.slice(index,index+4).map(player=><p className="mt-2 rounded bg-[#071f30] p-1 text-[10px]" key={player}>⠿ {player}　×</p>)}</div>)}</div><p className="mt-4 text-center text-xs text-[#b9c3c8]">Drag & drop players to organize groups</p></Panel><Panel title="ASSIGN PLAYERS TO TEAMS"><div className="flex gap-3"><div className="flex-1 rounded border border-white/20 p-2">{players.map(player=><p className="mb-2 rounded bg-[#071f30] p-2 text-xs" key={player}>👤 {player}　×</p>)}</div><div className="w-[42%]"><select className="w-full rounded border border-white/30 bg-[#02121f] p-2 text-xs"><option>Tech Titans</option></select><div className="my-3 rounded bg-[#0a2834] p-3 text-center text-xs"><FaTrophy className="mx-auto mb-2 text-2xl text-[#8bc832]"/>TECH TITANS<br/>12 / 18 Players</div><button className="w-full rounded bg-[#639d28] p-3 text-xs font-bold"><FaUserPlus className="mr-2 inline"/>Assign Players</button></div></div></Panel></div></div><footer className="mt-5 flex justify-between border-t border-white/15 px-5 py-4 text-xs text-[#ccd4d8]"><span className="text-[#86bf31]">● System Status: All Systems Operational</span><span>© 2025 CPL - CSE Premier League.</span><span>Contact Support</span></footer></main></div>;
+import { useEffect, useState } from "react";
+import { FaArrowRightFromBracket, FaBell, FaCalendarCheck, FaChartBar, FaKey, FaListCheck, FaMagnifyingGlass, FaShieldHalved, FaUserCheck, FaUserGroup, FaUserPlus, FaUsers } from "react-icons/fa6";
+import AdminPlayersView from "./admin-players-view";
+import AdminLoginForm from "./admin-login-form";
+import AdminChangePasswordView from "./admin-change-password-view";
+import AdminAddAdminView from "./admin-add-admin-view";
+import AdminRegistrationRulesView from "./admin-registration-rules-view";
+import AdminTeamKeysView from "./admin-team-keys-view";
+import AdminTeamsView from "./admin-teams-view";
+
+const menu=[{label:"Dashboard",icon:FaChartBar},{label:"Teams",icon:FaUserGroup},{label:"Players",icon:FaUsers},{label:"Player Registration Rules",icon:FaListCheck},{label:"Team Keys",icon:FaKey}];
+const accountMenu=[{label:"Change Password",icon:FaKey},{label:"Add Admin",icon:FaUserPlus}];
+const Stat=({icon:Icon,label,value,color})=><article className="rounded-lg border border-white/10 bg-[#031827] p-4"><div className="flex items-center gap-3"><i className={`grid size-14 place-items-center rounded-full text-2xl ${color}`}><Icon/></i><div><p className="text-xs font-bold uppercase">{label}</p><b className="text-3xl">{value ?? "…"}</b></div></div></article>;
+
+const AdminDashboard=()=>{
+const [session,setSession]=useState(undefined);
+const [activeSection,setActiveSection]=useState("Dashboard");
+const [stats,setStats]=useState({totalPlayers:null,totalTeams:null,pendingPlayers:null});
+const [showLogoutConfirm,setShowLogoutConfirm]=useState(false);
+
+useEffect(()=>{
+  (async()=>{
+    try{
+      const response=await fetch("/api/admin/me");
+      const result=await response.json();
+      setSession(response.ok?result.admin:null);
+    }catch{
+      setSession(null);
+    }
+  })();
+},[]);
+
+useEffect(()=>{
+  if(!session) return;
+  (async()=>{
+    try{
+      const [playersResponse,teamsResponse]=await Promise.all([fetch("/api/players"),fetch("/api/teams")]);
+      const playersResult=await playersResponse.json();
+      const teamsResult=await teamsResponse.json();
+      const players=playersResponse.ok?playersResult.players:[];
+      const teams=teamsResponse.ok?teamsResult.teams:[];
+      setStats({totalPlayers:players.length,totalTeams:teams.length,pendingPlayers:players.filter((player)=>player.status==="pending").length});
+    }catch{
+      setStats({totalPlayers:"—",totalTeams:"—",pendingPlayers:"—"});
+    }
+  })();
+},[session]);
+
+const logout=async()=>{
+  setShowLogoutConfirm(false);
+  await fetch("/api/admin/logout",{method:"POST"});
+  setSession(null);
+  setActiveSection("Dashboard");
+};
+
+if(session===undefined) return <div className="grid min-h-screen place-items-center bg-[#02121f] text-sm text-[#9faab2]">Loading admin panel...</div>;
+if(session===null) return <AdminLoginForm onSuccess={setSession}/>;
+
+const initials=session.email.slice(0,2).toUpperCase();
+return <div className="min-h-screen bg-[#02121f] text-[#edf2f4]">
+  <aside className="fixed inset-y-0 left-0 hidden w-[240px] border-r border-white/15 bg-[#031725] p-3 lg:flex lg:flex-col">
+    <div className="mb-7 border-b border-dashed border-white/50 p-3 text-center font-bold">✉ &nbsp; CPL LOGO</div>
+    <nav className="space-y-1">{menu.map(({label,icon:Icon})=><a className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm ${label===activeSection?"bg-[#4a7c17] text-white":"text-[#d1dade] hover:bg-white/10"}`} href="#dashboard" onClick={(event)=>{event.preventDefault();setActiveSection(label);}} key={label}><Icon/>{label}</a>)}</nav>
+    <div className="mt-auto space-y-1 border-t border-white/15 pt-3">
+      <p className="px-3 pb-1 text-[10px] font-bold uppercase text-[#7d8993]">Account</p>
+      {accountMenu.map(({label,icon:Icon})=><a className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm ${label===activeSection?"bg-[#4a7c17] text-white":"text-[#d1dade] hover:bg-white/10"}`} href="#dashboard" onClick={(event)=>{event.preventDefault();setActiveSection(label);}} key={label}><Icon/>{label}</a>)}
+      <a className="flex items-center gap-3 rounded-md px-3 py-2 text-sm text-[#d1dade] hover:bg-white/10" href="#dashboard" onClick={(event)=>{event.preventDefault();setShowLogoutConfirm(true);}}><FaArrowRightFromBracket/>Logout</a>
+    </div>
+  </aside>
+  <main className="flex min-h-screen flex-col lg:ml-[240px]">
+    <header className="flex h-[77px] shrink-0 items-center justify-between border-b border-white/15 px-5">
+      <div><h1 className="text-2xl font-bold">CPL Admin Panel</h1><p className="text-xs text-[#86bf31]">CSE Premier League</p></div>
+      <div className="hidden w-[360px] items-center gap-2 rounded-md border border-white/20 bg-[#031522] px-3 py-2 text-sm text-[#9faab2] md:flex"><FaMagnifyingGlass/> Search players, teams, ID, email...</div>
+      <div className="flex items-center gap-4"><FaBell className="text-xl"/><div className="hidden text-right text-sm sm:block"><b>{session.email}</b><small className="block text-[#86bf31] capitalize">{session.role==="superadmin"?"Super Admin":"Admin"}</small></div><i className="grid size-10 place-items-center rounded-full bg-[#b68d5a] text-[#091720]">{initials}</i></div>
+    </header>
+    <div id="dashboard" className="mx-auto w-full max-w-[1460px] flex-1 p-4">
+      {activeSection==="Players"?<AdminPlayersView/>
+        :activeSection==="Teams"?<AdminTeamsView/>
+        :activeSection==="Player Registration Rules"?<AdminRegistrationRulesView/>
+        :activeSection==="Team Keys"?<AdminTeamKeysView/>
+        :activeSection==="Change Password"?<AdminChangePasswordView/>
+        :activeSection==="Add Admin"?<AdminAddAdminView/>
+        :<div className="grid gap-3 md:grid-cols-3">
+          <Stat icon={FaUserCheck} label="Total Players" value={stats.totalPlayers} color="bg-[#315e1b] text-[#b8e84a]"/>
+          <Stat icon={FaShieldHalved} label="Total Teams" value={stats.totalTeams} color="bg-[#103e68] text-[#4aa7ff]"/>
+          <Stat icon={FaCalendarCheck} label="Pending Players" value={stats.pendingPlayers} color="bg-[#6b4a10] text-[#ffbf24]"/>
+        </div>}
+    </div>
+    <footer className="mt-5 flex shrink-0 justify-between border-t border-white/15 px-5 py-4 text-xs text-[#ccd4d8]"><span className="text-[#86bf31]">● System Status: All Systems Operational</span><span>© 2025 CPL - CSE Premier League.</span><span>Contact Support</span></footer>
+  </main>
+  {showLogoutConfirm && <div className="fixed inset-0 z-50 grid place-items-center bg-black/60 p-4">
+    <div className="w-full max-w-[360px] rounded-lg border border-white/15 bg-[#031827] p-5 text-center shadow-2xl">
+      <i className="mx-auto grid size-12 place-items-center rounded-full bg-[#7a1f1f] text-xl not-italic text-[#ff9d9d]"><FaArrowRightFromBracket/></i>
+      <h2 className="mt-4 text-base font-bold">Log out of admin panel?</h2>
+      <p className="mt-1 text-xs text-[#9faab2]">You will need to sign in again to access the admin panel.</p>
+      <div className="mt-5 flex gap-3">
+        <button className="flex-1 rounded-md border border-white/25 px-4 py-2.5 text-sm font-bold hover:bg-white/10" type="button" onClick={()=>setShowLogoutConfirm(false)}>Cancel</button>
+        <button className="flex-1 rounded-md bg-[#c0392b] px-4 py-2.5 text-sm font-bold hover:brightness-110" type="button" onClick={logout}>Logout</button>
+      </div>
+    </div>
+  </div>}
+</div>;
+};
 export default AdminDashboard;

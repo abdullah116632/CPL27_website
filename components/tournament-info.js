@@ -1,5 +1,5 @@
 import SectionTitle from "./section-title";
-import MatchCard from "./match-card";
+import CountdownCard from "./countdown-card";
 const container =
   "mx-auto w-[min(1450px,calc(100%-36px))] min-[781px]:w-[min(1450px,calc(100%-64px))]";
 const highlights = [
@@ -35,7 +35,7 @@ const TournamentInfo = () => (
           ))}
         </div>
       </div>
-      <MatchCard className="min-[1100px]:hidden" />
+      <CountdownCard className="min-[1100px]:hidden" />
       <div id="teams">
         <SectionTitle main="WHY JOIN" green="CPL?" />
         <ul className="m-0 list-none p-0">

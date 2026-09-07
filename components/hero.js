@@ -1,6 +1,6 @@
 import Image from "next/image";
 import RegistrationCard from "./registration-card";
-import MatchCard from "./match-card";
+import CountdownCard from "./countdown-card";
 const container =
   "mx-auto w-[min(1450px,calc(100%-36px))] min-[781px]:w-[min(1450px,calc(100%-64px))]";
 const Hero = () => {
@@ -37,6 +37,9 @@ const Hero = () => {
           <h2 className="m-0 -skew-x-3 font-[Impact,Arial_Narrow,sans-serif] text-[31px] leading-none tracking-[3px] text-[#78b82e] [text-shadow:2px_2px_#000] min-[781px]:text-[37px] min-[1100px]:text-[50px]">
             PREMIER LEAGUE
           </h2>
+          <p className="m-0 mt-1.5 text-[22px] tracking-[1px] text-[#d4dde3] min-[781px]:text-[26px] min-[1100px]:text-[35px]">
+            Organized by <b className="text-[#78b82e]">নির্বান ২০</b>
+          </p>
           <div className="my-[18px] h-0.5 w-[90%] max-w-[390px] bg-[linear-gradient(90deg,#78b82e,#78b82e,transparent)] text-right leading-[1px]">
             ●
           </div>
@@ -84,7 +87,7 @@ const Hero = () => {
               compete for glory.
             </RegistrationCard>
           </div>
-          <MatchCard className="mt-6 hidden w-[475px] max-w-full min-[1100px]:block" />
+          <CountdownCard className="mt-6 hidden w-[475px] max-w-full min-[1100px]:block" />
         </div>
       </div>
     </section>
