@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Anton } from "next/font/google";
 
+const anton = Anton({ subsets: ["latin"], weight: "400" });
 const TARGET_DATE = new Date("2026-10-02T00:00:00");
 const pad = (value) => String(value).padStart(2, "0");
 
@@ -32,14 +34,14 @@ const CountdownCard = ({ className = "" }) => {
 
   return (
     <article id="schedule" className={`rounded-[14px] bg-[#021522]/25 px-3 py-[17px] pb-[14px] text-white shadow-lg backdrop-blur-xl min-[781px]:px-6 ${className}`}>
-      <h3 className="text-center font-[Impact,Arial_Narrow,sans-serif] text-[19px] tracking-[.7px] [text-shadow:1px_1px_3px_rgba(0,0,0,.7)]">
+      <h3 className={`${anton.className} text-center text-[19px] tracking-[.7px] [text-shadow:1px_1px_3px_rgba(0,0,0,.7)]`}>
         AUCTION <span className="text-[#78b82e]">STARTS IN</span>
       </h3>
       <div className="mt-[15px] flex items-center justify-center gap-1.5">
         {units.map(({ label, value }, index) => (
           <div className="flex items-center" key={label}>
             <div className="min-w-[60px] py-2 text-center">
-              <b className="block font-[Impact,sans-serif] text-4xl text-[#78b82e] [text-shadow:1px_1px_4px_rgba(0,0,0,.7)] min-[781px]:text-5xl">{pad(value)}</b>
+              <b className={`${anton.className} block text-4xl text-[#78b82e] [text-shadow:1px_1px_4px_rgba(0,0,0,.7)] min-[781px]:text-5xl`}>{pad(value)}</b>
               <small className="text-[8px] tracking-[1px] [text-shadow:1px_1px_2px_rgba(0,0,0,.7)]">{label}</small>
             </div>
             {index < units.length - 1 && <b className="mx-1 text-2xl text-[#78b82e] [text-shadow:1px_1px_3px_rgba(0,0,0,.7)]">:</b>}

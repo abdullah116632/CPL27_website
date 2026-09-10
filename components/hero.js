@@ -1,6 +1,9 @@
 import Image from "next/image";
+import { Anton, Poppins } from "next/font/google";
 import RegistrationCard from "./registration-card";
 import CountdownCard from "./countdown-card";
+const anton = Anton({ subsets: ["latin"], weight: "400" });
+const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 const container =
   "mx-auto w-[min(1450px,calc(100%-36px))] min-[781px]:w-[min(1450px,calc(100%-64px))]";
 const Hero = () => {
@@ -27,15 +30,15 @@ const Hero = () => {
       />
       <div className="absolute inset-0 bg-[linear-gradient(90deg,#011521fa_0%,#031827ed_25%,#03182780_48%,transparent_73%)] max-[780px]:bg-[linear-gradient(90deg,#011521fa_0%,#011521b5_70%,#01152160)]" />
       <div className={`${container} relative z-10 flex h-full items-start pt-[82px] min-[781px]:items-center min-[781px]:pt-0`}>
-        <div className="w-full">
+        <div className={`${poppins.className} w-full`}>
           <p className="m-0 mb-1 whitespace-nowrap text-[clamp(10px,3.3vw,18px)] leading-[1.25]">
             The Ultimate Cricket Showdown of the{" "}
             <b className="text-[#78b82e]">CSE Faculty!</b>
           </p>
-          <h1 className="m-0 font-[Impact,Arial_Narrow,sans-serif] text-[47px] leading-[.92] tracking-[3px] [text-shadow:2px_2px_#000] min-[781px]:text-6xl min-[1100px]:text-7xl">
+          <h1 className={`${anton.className} m-0 text-[47px] leading-[.92] tracking-[3px] [text-shadow:2px_2px_#000] min-[781px]:text-6xl min-[1100px]:text-7xl`}>
             CPL <em className="font-normal not-italic">-</em> CSE
           </h1>
-          <h2 className="m-0 -skew-x-3 font-[Impact,Arial_Narrow,sans-serif] text-[31px] leading-none tracking-[3px] text-[#78b82e] [text-shadow:2px_2px_#000] min-[781px]:text-[37px] min-[1100px]:text-[50px]">
+          <h2 className={`${anton.className} m-0 -skew-x-3 text-[31px] leading-none tracking-[3px] text-[#78b82e] [text-shadow:2px_2px_#000] min-[781px]:text-[37px] min-[1100px]:text-[50px]`}>
             PREMIER LEAGUE
           </h2>
           <p className="m-0 mt-1.5 flex items-center gap-2 text-[22px] tracking-[1px] text-[#d4dde3] min-[781px]:text-[26px] min-[1100px]:text-[35px]">

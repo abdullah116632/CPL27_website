@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { FaCircleCheck, FaEnvelope, FaImage, FaPhone, FaSpinner, FaUpload, FaUser } from "react-icons/fa6";
 
 const sessions = ["2020-2021", "2021-2022", "2022-2023", "2023-2024", "2024-2025", "2025-2026", "Alumni"];
-const categories = ["Bowler", "Wicket Keeper (Batsman)", "Batsman", "All-Rounder"];
+const categories = ["Bowler", "Wicket Keeper (Batsman)", "Batsman", "Batting All-Rounder", "Bowling All-Rounder"];
 const fieldClass = "h-[53px] w-full rounded-lg border border-white/45 bg-[#031320]/80 px-4 text-sm text-white outline-none placeholder:text-[#a2aab1] focus:border-[#78b82e]";
 const Input = ({ label, name, type = "text", required = true, ...props }) => <label className="block"><span className="mb-2 block text-sm font-bold">{label}{!required && <em className="ml-1 text-xs font-normal text-[#aeb8be]">(Optional)</em>}</span><input className={fieldClass} name={name} type={type} required={required} {...props} /></label>;
 
@@ -73,7 +73,7 @@ const PlayerRegistrationForm = () => {
     if (playerId.length !== 7) return setMessage("Student ID must be exactly 7 digits.");
     if (registrationNumber.length !== 5) return setMessage("Registration number must be exactly 5 digits.");
     if (idStatus === "taken") return setMessage("This Student ID is already registered.");
-    if (!categoriesSelected.length) return setMessage("Select at least one category.");
+    if (!categoriesSelected.length) return setMessage("Select a category.");
     if (!paymentMethod) return setMessage("Select a payment method.");
     if (["bkash", "nagad", "rocket"].includes(paymentMethod) && !data.get("transactionId").trim()) return setMessage("Enter the transaction ID.");
     if (paymentMethod === "cash" && !data.get("cashReceivedBy").trim()) return setMessage("Enter who you gave the cash to.");
@@ -111,7 +111,7 @@ const PlayerRegistrationForm = () => {
         <Input label="REGISTRATION NUMBER" name="registrationNumber" type="text" inputMode="numeric" pattern="[0-9]{5}" maxLength={5} placeholder="5 digit registration number" />
         <label><span className="mb-2 block text-sm font-bold">SESSION</span><select className={fieldClass} name="session" required><option value="">Select session</option>{sessions.map(session => <option key={session}>{session}</option>)}</select></label>
         <Input label="EMAIL" name="email" type="email" required={false} placeholder="Enter email address" />
-        <fieldset className="min-[680px]:col-span-2"><legend className="mb-2 text-sm font-bold">CATEGORY</legend><div className="grid grid-cols-2 gap-2 rounded-lg border border-[#78b82e]/70 bg-[#031320]/80 p-3">{categories.map(category => <label className="flex cursor-pointer items-center gap-2 text-xs" key={category}><input className="size-4 accent-[#78b82e]" type="checkbox" name="categories[]" value={category} />{category}</label>)}</div></fieldset>
+        <fieldset className="min-[680px]:col-span-2"><legend className="mb-2 text-sm font-bold">CATEGORY</legend><div className="grid grid-cols-2 gap-2 rounded-lg border border-[#78b82e]/70 bg-[#031320]/80 p-3">{categories.map(category => <label className="flex cursor-pointer items-center gap-2 text-xs" key={category}><input className="size-4 accent-[#78b82e]" type="radio" name="categories[]" value={category} required />{category}</label>)}</div></fieldset>
         <fieldset className="min-[680px]:col-span-2"><legend className="mb-2 text-sm font-bold">PAYMENT INFORMATION</legend><div className="grid gap-4 rounded-lg border border-[#78b82e]/70 bg-[#031320]/80 p-3 min-[680px]:grid-cols-2">
           <label className="block"><span className="mb-2 block text-sm font-bold">PAYMENT METHOD</span><select className={fieldClass} name="paymentMethod" value={paymentMethod} onChange={(event) => setPaymentMethod(event.target.value)} required><option value="">Select payment method</option>{paymentMethods.map(({ value, label }) => <option key={value} value={value}>{label}</option>)}</select></label>
           {paymentInstructions[paymentMethod] && <p className="block rounded-lg border border-[#78b82e]/50 bg-[#02121f]/70 px-4 py-3 text-xs text-[#c5ccd1] min-[680px]:col-span-2">{paymentInstructions[paymentMethod].text} <b className="text-[#78b82e]">{paymentInstructions[paymentMethod].number}</b></p>}

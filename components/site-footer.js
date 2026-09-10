@@ -60,7 +60,7 @@ const SiteFooter = () => (
       <div
         className={`${container} flex flex-col items-center gap-1.5 text-center min-[781px]:flex-row min-[781px]:justify-between`}
       >
-        <span>© 2025 CPL - CSE Premier League. All Rights Reserved.</span>
+        <span>© 2027 CPL - CSE Premier League. All Rights Reserved.</span>
         <span>Play Fair. Play Hard. Play Together.</span>
       </div>
     </div>
