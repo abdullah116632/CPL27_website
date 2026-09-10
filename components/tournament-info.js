@@ -1,9 +1,8 @@
 import SectionTitle from "./section-title";
-import CountdownCard from "./countdown-card";
 const container =
   "mx-auto w-[min(1450px,calc(100%-36px))] min-[781px]:w-[min(1450px,calc(100%-64px))]";
 const highlights = [
-  ["🏆", "Competitive Matches", "Exciting T20 matches between top teams."],
+  ["🏆", "Competitive Matches", "Exciting T10 matches between top teams."],
   ["♟", "Top Talent", "Showcase your skills and shine on the big stage."],
   ["◉", "Prizes & Rewards", "Attractive prizes for winners and runners-up."],
   ["▣", "Live Updates", "Live scores, match updates and much more."],
@@ -14,7 +13,7 @@ const TournamentInfo = () => (
     className="bg-[linear-gradient(120deg,#fff,#f3f5f6)] py-[25px] pb-2"
   >
     <div
-      className={`${container} grid gap-[30px] min-[1100px]:grid-cols-[1.45fr_1.15fr_.95fr] min-[1100px]:gap-[52px]`}
+      className={`${container} grid gap-[30px] min-[1100px]:grid-cols-[1.6fr_1fr] min-[1100px]:gap-[52px]`}
     >
       <div>
         <SectionTitle main="TOURNAMENT" green="HIGHLIGHTS" />
@@ -35,14 +34,13 @@ const TournamentInfo = () => (
           ))}
         </div>
       </div>
-      <CountdownCard className="min-[1100px]:hidden" />
       <div id="teams">
         <SectionTitle main="WHY JOIN" green="CPL?" />
         <ul className="m-0 list-none p-0">
           {[
             "Build teamwork and leadership",
             "Network with peers and seniors",
-            "Boost your college experience",
+            "Boost your campus experience",
             "Be part of the CSE legacy",
           ].map((item) => (
             <li

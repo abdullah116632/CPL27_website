@@ -12,10 +12,11 @@ const Input = ({ label, name, type = "text", required = true, ...props }) => <la
 const idStatusText = { checking: "Checking availability...", available: "Student ID is available.", taken: "This Student ID is already registered.", invalid: "Student ID must be exactly 7 digits." };
 const idStatusClass = { checking: "text-[#c5ccd1]", available: "text-[#aee54e]", taken: "text-red-300", invalid: "text-red-300" };
 const paymentMethods = [{ value: "bkash", label: "bKash" }, { value: "nagad", label: "Nagad" }, { value: "rocket", label: "Rocket" }, { value: "cash", label: "Cash" }, { value: "other", label: "Other" }];
+const MAX_PHOTO_SIZE = 3 * 1024 * 1024;
 const paymentInstructions = {
-  bkash: { text: "Send Money to this bKash number:", number: "01810068119" },
-  nagad: { text: "Send Money to this Nagad number:", number: "01810068119" },
-  rocket: { text: "Send payment to this Rocket number:", number: "01768899941" },
+  bkash: { text: "Send Money (100 Tk) to this bKash number:", number: "01810068119" },
+  nagad: { text: "Send Money (100 Tk) to this Nagad number:", number: "01810068119" },
+  rocket: { text: "Send Money (100 Tk) to this Rocket number:", number: "01768899941" },
 };
 
 const PlayerRegistrationForm = () => {
@@ -23,6 +24,7 @@ const PlayerRegistrationForm = () => {
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState("idle");
   const [photoPreview, setPhotoPreview] = useState(null);
+  const [photoError, setPhotoError] = useState("");
   const [idStatus, setIdStatus] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState("");
   const idCheckTimer = useRef(null);
@@ -32,6 +34,13 @@ const PlayerRegistrationForm = () => {
 
   const handlePhotoChange = (event) => {
     const file = event.target.files?.[0];
+    if (file && file.size > MAX_PHOTO_SIZE) {
+      setPhotoError("Photo must be smaller than 3MB. Please choose a smaller file.");
+      event.target.value = "";
+      setPhotoPreview((previous) => { if (previous) URL.revokeObjectURL(previous); return null; });
+      return;
+    }
+    setPhotoError("");
     setPhotoPreview((previous) => { if (previous) URL.revokeObjectURL(previous); return file ? URL.createObjectURL(file) : null; });
   };
 
@@ -58,6 +67,8 @@ const PlayerRegistrationForm = () => {
     const playerId = data.get("playerId").replace(/\D/g, "");
     const registrationNumber = data.get("registrationNumber").replace(/\D/g, "");
     const categoriesSelected = data.getAll("categories[]");
+    const photo = data.get("photo");
+    if (photo instanceof File && photo.size > MAX_PHOTO_SIZE) return setMessage("Photo must be smaller than 3MB. Please choose a smaller file.");
     if (phone.length !== 11) return setMessage("Phone number must contain exactly 11 digits.");
     if (playerId.length !== 7) return setMessage("Student ID must be exactly 7 digits.");
     if (registrationNumber.length !== 5) return setMessage("Registration number must be exactly 5 digits.");
@@ -77,16 +88,18 @@ const PlayerRegistrationForm = () => {
   };
 
   return <form className="rounded-2xl border border-[#c6ae8c]/70 bg-[#021827e8] p-5 shadow-2xl backdrop-blur-md min-[680px]:p-8" onSubmit={submit}>
-    <div className="mb-7 flex items-center gap-4"><i className="grid size-16 place-items-center rounded-full bg-[#6ca82c] text-3xl not-italic"><FaUser /></i><div><h1 className="font-[Impact,Arial_Narrow,sans-serif] text-[38px] leading-none tracking-wide min-[680px]:text-[52px]">PLAYER <span className="text-[#78b82e]">REGISTRATION</span></h1><p className="mt-2 text-sm min-[680px]:text-base">Register yourself to join the <b className="text-[#78b82e]">CPL - CSE Premier League.</b></p></div></div>
+    <div className="mb-7 flex items-center gap-4"><i className="grid size-16 shrink-0 place-items-center rounded-full bg-[#6ca82c] text-3xl not-italic"><FaUser /></i><div><h1 className="font-[Impact,Arial_Narrow,sans-serif] text-[38px] leading-none tracking-wide min-[680px]:text-[52px]">PLAYER <span className="text-[#78b82e]">REGISTRATION</span></h1><p className="mt-2 text-sm min-[680px]:text-base">Register yourself to join the <b className="text-[#78b82e]">CPL - CSE Premier League.</b></p></div></div>
     <div className="grid gap-5 min-[680px]:grid-cols-[213px_1fr] min-[680px]:gap-8">
       <label className="block">
         <span className="mb-2 block text-sm font-bold">PLAYER PHOTO</span>
         <span className="relative flex h-[272px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-xl border-2 border-dashed border-[#78b82e] bg-[#031320]/75 text-center">
           {photoPreview
             ? <img className="absolute inset-0 size-full object-cover" src={photoPreview} alt="Selected player" />
-            : <><FaUpload className="text-5xl text-[#78b82e]" /><strong className="mt-4">Upload Photo</strong><small className="mt-2 text-xs text-[#abb3b9]">JPG, PNG (Max 2MB)</small></>}
+            : <><FaUpload className="text-5xl text-[#78b82e]" /><strong className="mt-4">Upload Photo</strong><small className="mt-2 px-3 text-xs text-[#abb3b9]">JPG, PNG (Max 3MB)</small></>}
           <input className="sr-only" type="file" name="photo" accept="image/png,image/jpeg" onChange={handlePhotoChange} required />
         </span>
+        <small className="mt-1.5 block text-xs text-[#abb3b9]">Use a 3:4 (portrait) or 1:1 (square) photo for the best result.</small>
+        {photoError && <small className="mt-1.5 block text-xs text-red-300">{photoError}</small>}
       </label>
       <div className="grid gap-5 min-[680px]:grid-cols-2">
         <Input label="FULL NAME" name="fullName" placeholder="Enter full name" />

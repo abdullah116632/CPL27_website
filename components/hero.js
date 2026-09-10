@@ -26,10 +26,11 @@ const Hero = () => {
         sizes="100vw"
       />
       <div className="absolute inset-0 bg-[linear-gradient(90deg,#011521fa_0%,#031827ed_25%,#03182780_48%,transparent_73%)] max-[780px]:bg-[linear-gradient(90deg,#011521fa_0%,#011521b5_70%,#01152160)]" />
-      <div className={`${container} relative z-10 flex h-full items-center`}>
+      <div className={`${container} relative z-10 flex h-full items-start pt-[82px] min-[781px]:items-center min-[781px]:pt-0`}>
         <div className="w-full">
-          <p className="text-[9px] tracking-[3px] text-[#d4dde3] min-[781px]:text-[10px]">
-            &nbsp; CSE FACULTY PRESENTS
+          <p className="m-0 mb-1 whitespace-nowrap text-[clamp(10px,3.3vw,18px)] leading-[1.25]">
+            The Ultimate Cricket Showdown of the{" "}
+            <b className="text-[#78b82e]">CSE Faculty!</b>
           </p>
           <h1 className="m-0 font-[Impact,Arial_Narrow,sans-serif] text-[47px] leading-[.92] tracking-[3px] [text-shadow:2px_2px_#000] min-[781px]:text-6xl min-[1100px]:text-7xl">
             CPL <em className="font-normal not-italic">-</em> CSE
@@ -37,22 +38,19 @@ const Hero = () => {
           <h2 className="m-0 -skew-x-3 font-[Impact,Arial_Narrow,sans-serif] text-[31px] leading-none tracking-[3px] text-[#78b82e] [text-shadow:2px_2px_#000] min-[781px]:text-[37px] min-[1100px]:text-[50px]">
             PREMIER LEAGUE
           </h2>
-          <p className="m-0 mt-1.5 text-[22px] tracking-[1px] text-[#d4dde3] min-[781px]:text-[26px] min-[1100px]:text-[35px]">
-            Organized by <b className="text-[#78b82e]">নির্বান ২০</b>
+          <p className="m-0 mt-1.5 flex items-center gap-2 text-[22px] tracking-[1px] text-[#d4dde3] min-[781px]:text-[26px] min-[1100px]:text-[35px]">
+            Organized by
+            <Image
+              className="h-[42px] w-auto min-[781px]:h-[50px] min-[1100px]:h-16"
+              src="/nirban-logo.png"
+              alt="নির্বান ২০"
+              width={770}
+              height={429}
+            />
           </p>
           <div className="my-[18px] h-0.5 w-[90%] max-w-[390px] bg-[linear-gradient(90deg,#78b82e,#78b82e,transparent)] text-right leading-[1px]">
             ●
           </div>
-          <p className="m-0 mb-1 text-base leading-[1.25] min-[781px]:text-lg">
-            The Ultimate Cricket Showdown of the
-            <br />
-            <b className="text-[#78b82e]">CSE Faculty!</b>
-          </p>
-          <p className="m-0 text-xs leading-[1.4] min-[781px]:text-[13px]">
-            Where talent meets teamwork and champions are made.
-            <br />
-            Represent. Compete. Conquer.
-          </p>
           <div
             id="registration"
             className="mt-3.5 flex flex-col gap-[18px] min-[781px]:flex-row"
@@ -87,7 +85,7 @@ const Hero = () => {
               compete for glory.
             </RegistrationCard>
           </div>
-          <CountdownCard className="mt-6 hidden w-[475px] max-w-full min-[1100px]:block" />
+          <CountdownCard className="mt-6 w-[475px] max-w-full" />
         </div>
       </div>
     </section>

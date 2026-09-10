@@ -77,7 +77,7 @@ const TeamRegistrationForm = () => {
   }
 
   return <form className="rounded-2xl border border-[#c6ae8c]/70 bg-[#021827e8] p-5 shadow-2xl backdrop-blur-md min-[680px]:p-8" onSubmit={submit}>
-    <div className="mb-7 flex items-center gap-4"><i className="grid size-16 place-items-center rounded-full bg-[#6ca82c] text-3xl not-italic"><FaUserGroup /></i><div><h1 className="font-[Impact,Arial_Narrow,sans-serif] text-[38px] leading-none tracking-wide min-[680px]:text-[52px]">TEAM <span className="text-[#78b82e]">REGISTRATION</span></h1><p className="mt-2 text-sm min-[680px]:text-base">Register your team to join the <b className="text-[#78b82e]">CPL - CSE Premier League.</b></p></div></div>
+    <div className="mb-7 flex items-center gap-4"><i className="grid size-16 shrink-0 place-items-center rounded-full bg-[#6ca82c] text-3xl not-italic"><FaUserGroup /></i><div><h1 className="font-[Impact,Arial_Narrow,sans-serif] text-[38px] leading-none tracking-wide min-[680px]:text-[52px]">TEAM <span className="text-[#78b82e]">REGISTRATION</span></h1><p className="mt-2 text-sm min-[680px]:text-base">Register your team to join the <b className="text-[#78b82e]">CPL - CSE Premier League.</b></p></div></div>
     <div className="grid gap-5 min-[680px]:grid-cols-[140px_1fr]">
       <label className="block">
         <span className="mb-2 block text-sm font-bold">TEAM LOGO</span>
