@@ -95,10 +95,9 @@ const PlayerRegistrationForm = () => {
         <span className="relative flex h-[272px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-xl border-2 border-dashed border-[#78b82e] bg-[#031320]/75 text-center">
           {photoPreview
             ? <img className="absolute inset-0 size-full object-cover" src={photoPreview} alt="Selected player" />
-            : <><FaUpload className="text-5xl text-[#78b82e]" /><strong className="mt-4">Upload Photo</strong><small className="mt-2 px-3 text-xs text-[#abb3b9]">JPG, PNG (Max 3MB)</small></>}
+            : <><FaUpload className="text-5xl text-[#78b82e]" /><strong className="mt-4">Upload Photo</strong><small className="mt-2 px-3 text-xs text-[#abb3b9]">JPG, PNG (Max 3MB)</small><small className="mt-1 px-3 text-xs text-[#abb3b9]">Use a 3:4 (portrait) or 1:1 (square) photo for the best result.</small><small className="mt-1 px-3 text-xs text-[#78b82e]">This photo will be shown during the auction</small></>}
           <input className="sr-only" type="file" name="photo" accept="image/png,image/jpeg" onChange={handlePhotoChange} required />
         </span>
-        <small className="mt-1.5 block text-xs text-[#abb3b9]">Use a 3:4 (portrait) or 1:1 (square) photo for the best result.</small>
         {photoError && <small className="mt-1.5 block text-xs text-red-300">{photoError}</small>}
       </label>
       <div className="grid gap-5 min-[680px]:grid-cols-2">
